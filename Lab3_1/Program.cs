@@ -10,15 +10,15 @@ namespace Lab3_1
 
             while (true)
             {
-
                 // Print out message asking if user wants to continue
 
-                Console.Write("Would you like to go again? (y/n)");
-
+                Console.Write("Would you like to know about another student? (enter 'yes' or 'no'): ");
+                
                 // Ask the user for their input
 
                 string response = Console.ReadLine();
                 response = response.ToLower();
+                //Console.WriteLine();
 
                 // Check if they typed "y". If so, return true.
                 // Otherwise return false.   YES   yes
@@ -33,31 +33,68 @@ namespace Lab3_1
                 }
                 else
                 {
-                    Console.WriteLine("Please enter y or n");
+                    Console.WriteLine("Please enter yes or no");
+                    //Console.WriteLine();
                 }
             }
 
         }
+
+        //static bool outRange()
+        //{
+        //    // Version 0.04. (Agile Programming)
+
+        //    while (true)
+        //    {
+   
+        //        // Ask the user for valid input range choice
+
+        //        if (response == "1" || response == "2" || response == "3")
+        //        {
+        //            return true;
+        //        }
+        //        else if (response == "n" || response == "no")
+        //        {
+        //            return false;
+        //        }
+        //        else
+        //        {
+        //            Console.WriteLine("Please enter y or n");
+        //        }
+        //    }
+
+        //}
         static void Main(string[] args)
         {
-            //Console.WriteLine("Lab 3.1: Student Information");
-            //Console.WriteLine("Hello from lab 3.1");
-            //Console.WriteLine("Here's another message.");
-            int input = 0;
-            string[] names = { "Todd Fecto", "Jeff Metzner", "Brandon Miller" };
-            string[] favFood = { "Lasagna", "Steak", "chicken" };
-            string[] prevTitle = { "Desktop Support", "Auditor", "Analyst" };
-
             do
             {
+                string entry;
+                int input = 0;
+                int userIn = 0;
+                string[] names = { "Luke Skywalker", "Han Solo", "Lando Calrissian" };
+                string[] favFood = { "Lasagna", "Steak", "chicken" };
+                string[] prevTitle = { "Jedi Master", "Scoundrel", "Smuggler" };
+
                 Console.WriteLine("Welcome to our DevBuild class. Which student would you like to learn more about?");
-                for (int i = 0; i < names.Length; i++)
+
+                do
                 {
-                    Console.WriteLine($"{i + 1} {names[i]}");
+                    Console.Write("Enter a number 1 - 3: ");
+                    entry = Console.ReadLine();
+
+                    do
+                    {
+                        Console.Write("That student does not exist. Please try again. (enter a number 1 - 3): ");
+                    }
+                    while (outRange());
                 }
-                Console.Write("Enter a number 1 - 3: ");
-                string entry = Console.ReadLine();
-                input = int.Parse(entry);
+                while (int.TryParse(entry, out input) == false);
+
+                //for (int i = 0; i < names.Length; i++)
+               // {
+                    //Console.WriteLine($"{userIn} {names[userIn]}");
+               // }
+
 
                 //do
                 //{
@@ -75,7 +112,22 @@ namespace Lab3_1
                 {
                     // Convert it to a number, for an index into the arrays
                     int choice = int.Parse(entry);
-                    Console.WriteLine($"{choice} {names[choice]}");
+                    Console.Write($"Student {choice} is {names[choice - 1]}. What would you like to know about {names[choice - 1]}? (enter 'favorite food' or 'previous title'): ");
+
+                    string moreInfo = Console.ReadLine();
+                    moreInfo = moreInfo.ToLower();
+
+                    // Check if they typed "y". If so, return true.
+                    // Otherwise return false.   YES   yes
+
+                    if (moreInfo == "favorite food")
+                    {
+                        Console.Write($"{names[choice - 1]}'s favorite food is {favFood[choice - 1]}.");
+                    }
+                    else if (moreInfo == "previous title")
+                    {
+                        Console.Write($"{names[choice - 1]}'s previous title was {prevTitle[choice - 1]}.");
+                    }
                 }
             }
             while (KeepGoing());
