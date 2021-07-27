@@ -4,9 +4,9 @@ namespace Lab3_1
 {
     class Program
     {
-        static bool KeepGoing()
+       /* static bool KeepGoing()
         {
-            // Version 0.04. (Agile Programming)
+             Version 0.04. (Agile Programming)
 
             while (true)
             {
@@ -42,8 +42,6 @@ namespace Lab3_1
 
         static bool outRange()
         {
-            // Version 0.04. (Agile Programming)
-
             while (true)
             {
                 // Ask the user for valid input range choice
@@ -65,16 +63,17 @@ namespace Lab3_1
                 //}
             }
 
-        }
+        }*/
         static void Main(string[] args)
         {
             do
             {
                 string entry;
                 int input = 0;
+                int userIn = 0;
                 string[] names = { "Luke Skywalker", "Han Solo", "Lando Calrissian" };
                 string[] favFood = { "Lasagna", "Steak", "chicken" };
-                string[] prevTitle = { "Jedi Master", "Scoundrel", "Smuggler" };
+                string[] prevTitle = { "Jedi Master in Training", "Scoundrel", "Smuggler" };
 
                 Console.WriteLine("Welcome to our DevBuild class. Which student would you like to learn more about?");
 
@@ -82,6 +81,7 @@ namespace Lab3_1
                 {
                     Console.Write("Enter a number 1 - 3: ");
                     entry = Console.ReadLine();
+                    userIn = int.Parse(entry);
 
                     do
                     {
@@ -126,7 +126,7 @@ namespace Lab3_1
                         Console.Write($"{names[choice - 1]}'s previous title was {prevTitle[choice - 1]}.");
                     }
             }
-            while (KeepGoing());
+            //while (KeepGoing());
             Console.WriteLine("Thanks!");
         }
     }
