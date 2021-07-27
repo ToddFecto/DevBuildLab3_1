@@ -40,37 +40,38 @@ namespace Lab3_1
 
         }
 
-        //static bool outRange()
-        //{
-        //    // Version 0.04. (Agile Programming)
+        static bool outRange()
+        {
+            // Version 0.04. (Agile Programming)
 
-        //    while (true)
-        //    {
-   
-        //        // Ask the user for valid input range choice
+            while (true)
+            {
+                // Ask the user for valid input range choice
+                Console.WriteLine("That student does not exist. Please try again. (enter a number 1 - 3): ");
+                string entry = Console.ReadLine();
+                int userIn = int.Parse(entry);
 
-        //        if (response == "1" || response == "2" || response == "3")
-        //        {
-        //            return true;
-        //        }
-        //        else if (response == "n" || response == "no")
-        //        {
-        //            return false;
-        //        }
-        //        else
-        //        {
-        //            Console.WriteLine("Please enter y or n");
-        //        }
-        //    }
+                if (userIn < 0 || userIn > 3)
+                {
+                    return true;
+                }
+                else if (userIn == 1 || userIn == 2 || userIn == 3)
+                {
+                    return false;
+                }
+                //else
+                //{
+                //    Console.WriteLine("That student does not exist. Please try again. (enter a number 1 - 3): ");
+                //}
+            }
 
-        //}
+        }
         static void Main(string[] args)
         {
             do
             {
                 string entry;
                 int input = 0;
-                int userIn = 0;
                 string[] names = { "Luke Skywalker", "Han Solo", "Lando Calrissian" };
                 string[] favFood = { "Lasagna", "Steak", "chicken" };
                 string[] prevTitle = { "Jedi Master", "Scoundrel", "Smuggler" };
@@ -84,34 +85,30 @@ namespace Lab3_1
 
                     do
                     {
-                        Console.Write("That student does not exist. Please try again. (enter a number 1 - 3): ");
-                    }
-                    while (outRange());
+                        Console.WriteLine("That student does not exist. Please try again. (enter a number 1 - 3): ");
+                    } while (outRange());
                 }
                 while (int.TryParse(entry, out input) == false);
 
                 //for (int i = 0; i < names.Length; i++)
-               // {
-                    //Console.WriteLine($"{userIn} {names[userIn]}");
-               // }
+                // {
+                //Console.WriteLine($"{userIn} {names[userIn]}");
+                // }
 
 
-                //do
-                //{
-                //    Console.WriteLine("That student does not exist. Please try again. (enter a number 1 - 3): ");
-                //} while (entry < "1" || > "3");
-                if (entry == "A")
-                {
-                    // print everything
-                    for (int i = 0; i < names.Length; i++)
-                    {
-                        Console.WriteLine($"{i + 1} {names[i]} {favFood[i]} {prevTitle[i]}");
-                    }
-                }
-                else
-                {
-                    // Convert it to a number, for an index into the arrays
-                    int choice = int.Parse(entry);
+
+            //if (entry == "A")
+            //{
+            //    // print everything
+            //    for (int i = 0; i < names.Length; i++)
+            //    {
+            //        Console.WriteLine($"{i + 1} {names[i]} {favFood[i]} {prevTitle[i]}");
+            //    }
+            //}
+            //else
+
+            // Convert it to a number, for an index into the arrays
+            int choice = int.Parse(entry);
                     Console.Write($"Student {choice} is {names[choice - 1]}. What would you like to know about {names[choice - 1]}? (enter 'favorite food' or 'previous title'): ");
 
                     string moreInfo = Console.ReadLine();
@@ -128,9 +125,9 @@ namespace Lab3_1
                     {
                         Console.Write($"{names[choice - 1]}'s previous title was {prevTitle[choice - 1]}.");
                     }
-                }
             }
             while (KeepGoing());
+            Console.WriteLine("Thanks!");
         }
     }
 }
