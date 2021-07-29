@@ -4,130 +4,95 @@ namespace Lab3_1
 {
     class Program
     {
-       /* static bool KeepGoing()
+        static bool contStud()
         {
-             Version 0.04. (Agile Programming)
-
             while (true)
             {
-                // Print out message asking if user wants to continue
+                Console.Write("\n\nWould you like to know about another student? (Enter 'yes' or 'no'): ");                        //Prompts for user input to continue or not
+                string moreStud = Console.ReadLine();
+                moreStud = moreStud.ToLower();                           //Converts input case to only lower case
 
-                Console.Write("Would you like to know about another student? (enter 'yes' or 'no'): ");
-                
-                // Ask the user for their input
-
-                string response = Console.ReadLine();
-                response = response.ToLower();
-                //Console.WriteLine();
-
-                // Check if they typed "y". If so, return true.
-                // Otherwise return false.   YES   yes
-
-                if (response == "y" || response == "yes")
+                if (moreStud == "y" || moreStud == "yes")                //Checks the condition to continue measuring rooms or quit
                 {
                     return true;
                 }
-                else if (response == "n" || response == "no")
+                else if (moreStud == "n" || moreStud == "no")
                 {
                     return false;
                 }
                 else
                 {
-                    Console.WriteLine("Please enter yes or no");
-                    //Console.WriteLine();
+                    Console.Write("Please enter only y or n!");                //Prompts user to only enter a y (yes ) or n (no) if another character is entered
                 }
             }
-
         }
-
-        static bool outRange()
-        {
-            while (true)
-            {
-                // Ask the user for valid input range choice
-                Console.WriteLine("That student does not exist. Please try again. (enter a number 1 - 3): ");
-                string entry = Console.ReadLine();
-                int userIn = int.Parse(entry);
-
-                if (userIn < 0 || userIn > 3)
-                {
-                    return true;
-                }
-                else if (userIn == 1 || userIn == 2 || userIn == 3)
-                {
-                    return false;
-                }
-                //else
-                //{
-                //    Console.WriteLine("That student does not exist. Please try again. (enter a number 1 - 3): ");
-                //}
-            }
-
-        }*/
         static void Main(string[] args)
         {
+
+            string[] names = { "Luke", "Han", "Lando", "Leia", "Chewbacca", "Darth" };
+            string[] favFood = { "Lasagna", "Steak", "Chicken", "Vegan Buffet", "Pizza", "Ice Cream" };
+            string[] prevTitle = { "Jedi Master in Training", "Scoundrel", "Smuggler", "Princess", "Co-Pilot", "Villain" };
+
+
+            Console.WriteLine("Welcome to our DevBuild class.");
             do
             {
-                string entry;
-                int input = 0;
-                int userIn = 0;
-                string[] names = { "Luke Skywalker", "Han Solo", "Lando Calrissian" };
-                string[] favFood = { "Lasagna", "Steak", "chicken" };
-                string[] prevTitle = { "Jedi Master in Training", "Scoundrel", "Smuggler" };
+                bool rangeOk = false;
+                int studIn = 0;
 
-                Console.WriteLine("Welcome to our DevBuild class. Which student would you like to learn more about?");
-
-                do
+                while (rangeOk == false)
                 {
-                    Console.Write("Enter a number 1 - 3: ");
-                    entry = Console.ReadLine();
-                    userIn = int.Parse(entry);
+                    Console.WriteLine("Which student would you like to learn more about?");
+                    Console.Write($"Enter a number 1 - {names.Length}: ");
+                    string entry = Console.ReadLine();
 
-                    do
+                    if (int.TryParse(entry, out studIn))
                     {
-                        Console.WriteLine("That student does not exist. Please try again. (enter a number 1 - 3): ");
-                    } while (outRange());
+                        if (studIn >= 1 && studIn <= names.Length)
+                        {
+                            studIn = studIn - 1;
+                            rangeOk = true;
+                        }
+                        else
+                        {
+                            Console.Write($"\nThat student number isn't in our list. Enter a number from 1 -{names.Length}: ");
+                        }
+                    }
+                    else
+                    {
+                        Console.Write($"\nSorry, input has to be numeric. Please enter a number 1-{names.Length}.");
+                    }
                 }
-                while (int.TryParse(entry, out input) == false);
 
-                //for (int i = 0; i < names.Length; i++)
-                // {
-                //Console.WriteLine($"{userIn} {names[userIn]}");
-                // }
+                Console.WriteLine($"Student {studIn + 1} is {names[studIn]}");
 
+                bool optionIn = false;
+                while (optionIn == false)
+                {
+                    Console.Write($"What would you like to know about {names[studIn]}? (Please enter 'favorite food' or 'previous title'): ");
 
+                    string moreInfo = Console.ReadLine().ToLower();
 
-            //if (entry == "A")
-            //{
-            //    // print everything
-            //    for (int i = 0; i < names.Length; i++)
-            //    {
-            //        Console.WriteLine($"{i + 1} {names[i]} {favFood[i]} {prevTitle[i]}");
-            //    }
-            //}
-            //else
-
-            // Convert it to a number, for an index into the arrays
-            int choice = int.Parse(entry);
-                    Console.Write($"Student {choice} is {names[choice - 1]}. What would you like to know about {names[choice - 1]}? (enter 'favorite food' or 'previous title'): ");
-
-                    string moreInfo = Console.ReadLine();
-                    moreInfo = moreInfo.ToLower();
-
-                    // Check if they typed "y". If so, return true.
-                    // Otherwise return false.   YES   yes
-
-                    if (moreInfo == "favorite food")
+                    if (moreInfo == "favorite food" || moreInfo == "food")
                     {
-                        Console.Write($"{names[choice - 1]}'s favorite food is {favFood[choice - 1]}.");
+                        Console.Write($"{names[studIn]}'s favorite food is {favFood[studIn]}.");
+                        optionIn = true;
                     }
-                    else if (moreInfo == "previous title")
+                    else if (moreInfo == "previous title" || moreInfo == "title")
                     {
-                        Console.Write($"{names[choice - 1]}'s previous title was {prevTitle[choice - 1]}.");
+                        Console.Write($"{names[studIn]}'s previous title was {prevTitle[studIn]}.");
+                        optionIn = true;
                     }
-            }
-            //while (KeepGoing());
-            Console.WriteLine("Thanks!");
+                    else
+                    {
+                        Console.WriteLine("Sorry, that is not a an option. Please try again.");
+                    }
+                }
+            } while (contStud());
+
+            Console.WriteLine("\nThanks for checking in with our class!");
         }
+
     }
 }
+
